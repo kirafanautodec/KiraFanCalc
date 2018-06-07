@@ -1,2 +1,1 @@
-#krrfCardMaker
 # KiraFanCalc

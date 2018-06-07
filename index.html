@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>きらファン計算機 - KiraFan Wiki</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="./css/material.brown-pink.min.css">
+    <link rel="stylesheet" href="./css/dialog-polyfill.css">
+    <script src="./libs/material.min.js"></script>
+    <script src="./libs/dialog-polyfill.js"></script>
+    <script src="./libs/jquery.min.js"></script>
+    <script src="./libs/vue.js"></script>
+    <link rel="stylesheet" href="./css/index.css">
+    <base target="_blank">
+    <link rel="icon" href="https://kirafan.bangbang93.com/static/assets/texture/charauiresource/charaicon/charaicon_14032001.jpeg" type="image/x-icon">
+  </head>
+  <body>
+    <div id="upperDiv"><img src="./img/class/0.png" id="downloadImg"></div>
+
+    <div class="mdl-main mdl-layout mdl-js-layout mdl-layout--fixed-header">
+      <header class="mdl-layout__header">
+        <div class="mdl-layout__header-row">
+          <!-- Title -->
+          <span class="mdl-layout-title">きらファン計算機</span>
+          <!-- Add spacer, to align navigation to the right -->
+          <div class="mdl-layout-spacer"></div>
+          <!-- Navigation -->
+          <nav class="mdl-navigation titleicon">
+            <a class="mdl-navigation__link" href="https://wiki.kirafan.moe">
+              <img src="./img/wiki_logo.white.png" alt="">
+            </a>
+          </nav>
+        </div>
+      </header>
+
+      <main class="mdl-layout__content mdl-main-content">
+        <div class="mdl-grid" id="damage">
+          <div class="setting-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+            <div>
+              <h5 id="titleSettings" class="mdl-color-text--accent">ダメージ計算</h5>
+            </div>
+            <div class="mdl-grid">
+              <div class="mdl-cell mdl-cell--8-col mdl-cell--6-col-tablet mdl-cell--4-col-phone">
+                <div class="mdl-grid">
+                  <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--2-col-phone">
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                      <input class="mdl-textfield__input" type="text" pattern=" *-?[0-9]*(\.[0-9]+)? *" v-model="ATK">
+                      <label class="mdl-textfield__label">味方攻撃</label>
+                      <span class="mdl-textfield__error">Not a number!</span>
+                    </div>
+                  </div>
+                  <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--2-col-phone">
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                      <input class="mdl-textfield__input" type="text" pattern=" *-?[0-9]*(\.[0-9]+)? *" v-model="DEF">
+                      <label class="mdl-textfield__label">敵防御</label>
+                      <span class="mdl-textfield__error">Not a number!</span>
+                    </div>
+                  </div>
+                  <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--2-col-phone">
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                      <input class="mdl-textfield__input" type="text" pattern=" *-?[0-9]*(\.[0-9]+)? *" v-model="skill">
+                      <label class="mdl-textfield__label">スキル/%</label>
+                      <span class="mdl-textfield__error">Not a number!</span>
+                    </div>
+                  </div>
+                  <div class="mdl-cell mdl-cell--hide-desktop mdl-cell--4-col-tablet mdl-cell--2-col-phone">
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                      <input class="mdl-textfield__input" type="text" pattern=" *-?[0-9]*(\.[0-9]+)? *" v-model="oncebuff">
+                      <label class="mdl-textfield__label">一度バフ/%</label>
+                      <span class="mdl-textfield__error">Not a number!</span>
+                    </div>
+                  </div>
+                  <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--2-col-phone">
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                      <input class="mdl-textfield__input" type="text" pattern=" *-?[0-9]*(\.[0-9]+)? *" v-model="ATKbuff">
+                      <label class="mdl-textfield__label">味方攻撃バフ/%</label>
+                      <span class="mdl-textfield__error">Not a number!</span>
+                    </div>
+                  </div>
+                  <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--2-col-phone">
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                      <input class="mdl-textfield__input" type="text" pattern=" *-?[0-9]*(\.[0-9]+)? *" v-model="DEFbuff">
+                      <label class="mdl-textfield__label">敵防御バフ/%</label>
+                      <span class="mdl-textfield__error">Not a number!</span>
+                    </div>
+                  </div>
+                  <div class="mdl-cell mdl-cell--4-col mdl-cell--hide-tablet mdl-cell--hide-phone">
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                      <input class="mdl-textfield__input" type="text" pattern=" *-?[0-9]*(\.[0-9]+)? *" v-model="oncebuff">
+                      <label class="mdl-textfield__label">一度バフ/%</label>
+                      <span class="mdl-textfield__error">Not a number!</span>
+                    </div>
+                  </div>
+                  <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--hide-phone">
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                      <input class="mdl-textfield__input" type="text" pattern=" *-?[0-9]*(\.[0-9]+)? *" v-model="ATKElement">
+                      <label class="mdl-textfield__label">味方属性バフ/%</label>
+                      <span class="mdl-textfield__error">Not a number!</span>
+                    </div>
+                  </div>
+                  <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--hide-phone">
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                      <input class="mdl-textfield__input" type="text" pattern=" *-?[0-9]*(\.[0-9]+)? *" v-model="DEFElement">
+                      <label class="mdl-textfield__label">敵属性バフ/%</label>
+                      <span class="mdl-textfield__error">Not a number!</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mdl-cell mdl-cell--4-col mdl-cell--2-col-tablet mdl-cell--4-col-phone">
+                <button class="mdl-button mdl-js-button mdl-button--primary">
+                  クリティカル
+                </button>
+                <hr>
+                <button class="mdl-button mdl-js-button mdl-button--primary">
+                  抜群
+                </button>
+                <button class="mdl-button mdl-js-button mdl-button--primary">
+                  普通
+                </button>
+                <button class="mdl-button mdl-js-button mdl-button--primary">
+                  今一
+                </button>
+                <hr>
+                <button class="mdl-button mdl-js-button mdl-button--primary">
+                  1st
+                </button>
+                <button class="mdl-button mdl-js-button mdl-button--primary">
+                  2nd
+                </button>
+                <button class="mdl-button mdl-js-button mdl-button--primary">
+                  3rd
+                </button>
+              </div>
+            </div>
+            <hr>
+            <h1 class="text-right">{{parseInt(damage*0.85)}} ~ {{damage}}</h1>
+            <h2 class="text-right">{{parseInt(damage*0.85)}} ~ {{damage}}</h2>
+            <h3 class="text-right">{{parseInt(damage*0.85)}} ~ {{damage}}</h3>
+
+          </div>
+        </div>
+      </main>
+    </div>
+  </body>
+  <script src="./js/index.js"></script>
+</html>

@@ -16,11 +16,11 @@ var damagecalc = new Vue({
     ATK: null,
     DEF: null,
     skill: null,
-    ATKbuff: null,
-    DEFbuff: null,
-    oncebuff: null, 
-    ATKElement: null, 
-    DEFElement: null,
+    ATKbuff: 0,
+    DEFbuff: 0,
+    oncebuff: 0, 
+    ATKElement: 0, 
+    DEFElement: 0,
     element: 1.0,
     critical: false,
     jump: 1.0
@@ -44,14 +44,14 @@ var criticalcalc = new Vue({
   el: '#criticalcalc',
   data: {
     luck0: null,
-    luck1: null,
-    buff0: null,
-    buff1: null,
+    luck1: 30,
+    buff0: 0,
+    buff1: 0,
     element: 1.0
   },
   computed: {
     critical: function() {
-      return parseInt(this.element==0.5?0:(this.luck0*1.2*(this.element==2.0?1.1:1.0)*(1+this.buff0/100)-this.luck1*(1+this.buff1/100)))
+      return parseInt(this.element==0.5?0:range(this.luck0*1.2*(this.element==2.0?1.1:1.0)*(1+this.buff0/100)-this.luck1*(1+this.buff1/100), 0, 100))
     }
   }
 });

@@ -18,23 +18,15 @@
       <header class="mdl-layout__header">
         <!-- Tabs -->
         <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
-          <a href="#home" class="mdl-layout__tab is-active">ホーム</a>
-          <a href="#damagecalc" class="mdl-layout__tab">ダメージ</a>
-          <a href="#scroll-tab-2" class="mdl-layout__tab">クリティカル率</a>
+          <a class="mdl-layout__tab is-active" href="#home">ホーム</a>
+          <a class="mdl-layout__tab" href="#damagecalc">ダメージ</a>
+          <a class="mdl-layout__tab" href="#criticalcalc">クリ率</a>
+          <a class="mdl-layout__tab" href="#ordercalc">タイムライン</a>
+          <a class="mdl-layout__tab" href="#statuscalc">ステータス</a>
+          <a class="mdl-layout__tab" href="#">　　　　</a>
         </div>
       </header>
-      <!--header class="mdl-layout__header">
-        <div class="mdl-layout__header-row">
-          <span class="mdl-layout-title">きらファン計算機</span>
-          <div class="mdl-layout-spacer"></div>
-          <nav class="mdl-navigation titleicon">
-            <a class="mdl-navigation__link" href="https://wiki.kirafan.moe">
-              <img src="./img/wiki_logo.white.png" alt="">
-            </a>
-          </nav>
-        </div>
-      </header-->
-
+      
       <main class="mdl-layout__content">
         <section class="mdl-layout__tab-panel is-active" id="home">
           <div class="page-content">
@@ -157,12 +149,12 @@
                 </div>
               </div>
             </div>
-
           </div>
         </section>
-        <section class="mdl-layout__tab-panel" id="scroll-tab-2">
+
+        <section class="mdl-layout__tab-panel" id="criticalcalc">
           <div class="page-content">
-            <div class="mdl-grid" id="criticalcalc">
+            <div class="mdl-grid">
               <div class="setting-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
                 <div>
                   <h5 id="titleSettings" class="mdl-color-text--accent">クリティカル率計算</h5>
@@ -223,6 +215,184 @@
                   </div>
                   <div class="mdl-cell mdl-cell--hide-desktop mdl-cell--hide-tablet mdl-cell--12-col-phone">
                     <h3>クリティカル率＝<span style="float:right">{{critical}}%</span></h3>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="mdl-layout__tab-panel" id="ordercalc">
+          <div class="page-content">
+            <div class="mdl-grid">
+              <div class="setting-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--4-col mdl-cell--3-col-tablet">
+                <div>
+                  <h5 id="titleSettings" class="mdl-color-text--accent">硬直値計算</h5>
+                </div>
+                <div class="mdl-grid">
+                  <div class="mdl-cell mdl-cell--12-col">
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                      <input class="mdl-textfield__input" type="text" pattern=" *-?[0-9]*(\.[0-9]+)? *" v-model="spd">
+                      <label class="mdl-textfield__label">速度</label>
+                      <span class="mdl-textfield__error">Not a number!</span>
+                    </div>
+                  </div>
+                  <div class="mdl-cell mdl-cell--12-col">
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                      <input class="mdl-textfield__input" type="text" pattern=" *-?[0-9]*(\.[0-9]+)? *" v-model="load">
+                      <label class="mdl-textfield__label">スキル硬直/%</label>
+                      <span class="mdl-textfield__error">Not a number!</span>
+                    </div>
+                  </div>
+                  <div class="mdl-cell mdl-cell--12-col">
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                      <input class="mdl-textfield__input" type="text" pattern=" *-?[0-9]*(\.[0-9]+)? *" v-model="buff">
+                      <label class="mdl-textfield__label">速度バフ/%</label>
+                      <span class="mdl-textfield__error">Not a number!</span>
+                    </div>
+                  </div>
+                </div>
+                <hr>
+                <div class="mdl-grid">
+                  <div class="mdl-cell mdl-cell--12-col-desktop mdl-cell--hide-tablet mdl-cell--hide-phone">
+                    <h3>硬直値＝<span style="float:right">{{order.toFixed(2)}}</span></h3>
+                  </div>
+                  <div class="mdl-cell mdl-cell--hide-desktop mdl-cell--12-col-tablet mdl-cell--hide-phone">
+                    <h4>硬直値＝<span style="float:right">{{order.toFixed(2)}}</span></h4>
+                  </div>
+                  <div class="mdl-cell mdl-cell--hide-desktop mdl-cell--hide-tablet mdl-cell--12-col-phone">
+                    <h3>硬直値＝<span style="float:right">{{order.toFixed(2)}}</span></h3>
+                  </div>
+                </div>
+              </div>
+              <div class="setting-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--8-col mdl-cell--5-col-tablet mdl-cell--hide-phone">
+                <div>
+                  <h5 id="titleSettings" class="mdl-color-text--accent">タイムライン</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="mdl-layout__tab-panel" id="statuscalc">
+          <div class="page-content">
+            <div class="mdl-grid">
+              <div class="setting-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+                <div>
+                  <h5 id="titleSettings" class="mdl-color-text--accent">ステータス計算</h5>
+                </div>
+                <div class="mdl-grid">
+                  <div class="mdl-cell mdl-cell--12-col">
+                    <button :class="'mdl-button mdl-js-button mdl-button--primary'+(characlass==0?' mdl-button--raised':'')" @click="characlass=0">
+                      せんし
+                    </button>
+                    <button :class="'mdl-button mdl-js-button mdl-button--primary'+(characlass==1?' mdl-button--raised':'')" @click="characlass=1">
+                      まほうつかい
+                    </button>
+                    <button :class="'mdl-button mdl-js-button mdl-button--primary'+(characlass==2?' mdl-button--raised':'')" @click="characlass=2">
+                      そうりょ
+                    </button>
+                    <button :class="'mdl-button mdl-js-button mdl-button--primary'+(characlass==3?' mdl-button--raised':'')" @click="characlass=3">
+                      ナイト
+                    </button>
+                    <button :class="'mdl-button mdl-js-button mdl-button--primary'+(characlass==4?' mdl-button--raised':'')" @click="characlass=4">
+                      アルケミスト
+                    </button>
+                  </div>
+                  <div class="mdl-cell mdl-cell--12-col">
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                      <input class="mdl-textfield__input" type="text" pattern="[0-9]*" v-model="initlv">
+                      <label class="mdl-textfield__label">Lv.</label>
+                      <span class="mdl-textfield__error">Not available!</span>
+                    </div>
+                  </div>
+                  <div class="mdl-cell mdl-cell--2-col">
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                      <input class="mdl-textfield__input" type="text" pattern="[0-9]*" v-model="init[0]">
+                      <label class="mdl-textfield__label">HP</label>
+                      <span class="mdl-textfield__error">Not available!</span>
+                    </div>
+                  </div>
+                  <div class="mdl-cell mdl-cell--2-col">
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                      <input class="mdl-textfield__input" type="text" pattern="[0-9]*" v-model="init[1]">
+                      <label class="mdl-textfield__label">ATK</label>
+                      <span class="mdl-textfield__error">Not available!</span>
+                    </div>
+                  </div>
+                  <div class="mdl-cell mdl-cell--2-col">
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                      <input class="mdl-textfield__input" type="text" pattern="[0-9]*" v-model="init[2]">
+                      <label class="mdl-textfield__label">MAT</label>
+                      <span class="mdl-textfield__error">Not available!</span>
+                    </div>
+                  </div>
+                  <div class="mdl-cell mdl-cell--2-col">
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                      <input class="mdl-textfield__input" type="text" pattern="[0-9]*" v-model="init[3]">
+                      <label class="mdl-textfield__label">DEF</label>
+                      <span class="mdl-textfield__error">Not available!</span>
+                    </div>
+                  </div>
+                  <div class="mdl-cell mdl-cell--2-col">
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                      <input class="mdl-textfield__input" type="text" pattern="[0-9]*" v-model="init[4]">
+                      <label class="mdl-textfield__label">MDF</label>
+                      <span class="mdl-textfield__error">Not available!</span>
+                    </div>
+                  </div>
+                  <div class="mdl-cell mdl-cell--2-col">
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                      <input class="mdl-textfield__input" type="text" pattern="[0-9]*" v-model="init[5]">
+                      <label class="mdl-textfield__label">SPD</label>
+                      <span class="mdl-textfield__error">Not available!</span>
+                    </div>
+                  </div>
+                </div>
+                <hr>
+                <div class="mdl-grid">
+                  <div class="mdl-cell mdl-cell--12-col">
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                      <input class="mdl-textfield__input" type="text" pattern="[0-9]*" v-model="lv">
+                      <label class="mdl-textfield__label">Lv.</label>
+                      <span class="mdl-textfield__error">Not available!</span>
+                    </div>
+                  </div>
+                  <div class="mdl-cell mdl-cell--2-col">
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                      <input class="mdl-textfield__input" type="text" v-model="result[0]" readonly>
+                      <label class="mdl-textfield__label">HP</label>
+                    </div>
+                  </div>
+                  <div class="mdl-cell mdl-cell--2-col">
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                      <input class="mdl-textfield__input" type="text" v-model="result[1]" readonly>
+                      <label class="mdl-textfield__label">ATK</label>
+                    </div>
+                  </div>
+                  <div class="mdl-cell mdl-cell--2-col">
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                      <input class="mdl-textfield__input" type="text" v-model="result[2]" readonly>
+                      <label class="mdl-textfield__label">MAT</label>
+                    </div>
+                  </div>
+                  <div class="mdl-cell mdl-cell--2-col">
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                      <input class="mdl-textfield__input" type="text" v-model="result[3]" readonly>
+                      <label class="mdl-textfield__label">DEF</label>
+                    </div>
+                  </div>
+                  <div class="mdl-cell mdl-cell--2-col">
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                      <input class="mdl-textfield__input" type="text" v-model="result[4]" readonly>
+                      <label class="mdl-textfield__label">MDF</label>
+                    </div>
+                  </div>
+                  <div class="mdl-cell mdl-cell--2-col">
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                      <input class="mdl-textfield__input" type="text" v-model="result[5]" readonly>
+                      <label class="mdl-textfield__label">SPD</label>
+                    </div>
                   </div>
                 </div>
               </div>

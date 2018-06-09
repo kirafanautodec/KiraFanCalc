@@ -55,3 +55,42 @@ var criticalcalc = new Vue({
     }
   }
 });
+
+var ordercalc = new Vue({
+  el: '#ordercalc',
+  data: {
+    spd: null,
+    load: 75,
+    buff: 0
+  },
+  computed: {
+    order: function() {
+      return range((100-Math.floor(((this.spd<50?NaN:this.spd)-50)/2)-1)*this.load*0.01*(1-this.buff*0.01), 15, 500)
+    }
+  }
+});
+
+var statuscalc = new Vue({
+  el: '#statuscalc',
+  data: {
+    characlass: 0,
+    table: [[0.052, 0.055, 0.040, 0.080, 0.071, 0.001], [0.052, 0.040, 0.055, 0.071, 0.080, 0.001], [0.060, 0.040, 0.040, 0.080, 0.088, 0.001], [0.045, 0.040, 0.040, 0.097, 0.088, 0.001], [0.047, 0.040, 0.050, 0.071, 0.097, 0.001]],
+    initlv: null,
+    init: [null, null, null, null, null, null],
+    lv: null
+  },
+  computed: {
+    result: function() {
+      ans = [null, null, null, null, null, null];
+      for (var i=0; i<6; i++)
+      {
+        var a0 = Math.floor(this.init[i]/(1+(this.initlv-1)*this.table[this.characlass][i]));
+        var a1 = Math.ceil(a0*(1+(this.lv-1)*this.table[this.characlass][i]));
+
+        if (this.initlv && this.lv && this.init[i] && a1) ans[i] = a1;
+        else ans[i] = " ";
+      }
+      return ans;
+    }
+  }
+});

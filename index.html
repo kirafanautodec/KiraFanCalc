@@ -26,7 +26,7 @@
           <a class="mdl-layout__tab" href="#">　　　　</a>
         </div>
       </header>
-      
+
       <main class="mdl-layout__content">
         <section class="mdl-layout__tab-panel is-active" id="home">
           <div class="page-content">
@@ -299,49 +299,51 @@
                       アルケミスト
                     </button>
                   </div>
-                  <div class="mdl-cell mdl-cell--12-col">
+                  <div class="mdl-cell mdl-cell--12-col mdl-cell--2-col-tablet mdl-cell--1-col-phone">
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                       <input class="mdl-textfield__input" type="text" pattern="[0-9]*" v-model="initlv">
                       <label class="mdl-textfield__label">Lv.</label>
                       <span class="mdl-textfield__error">Not available!</span>
                     </div>
                   </div>
-                  <div class="mdl-cell mdl-cell--2-col">
+                  <div class="mdl-cell mdl-cell--2-col mdl-cell--2-col-tablet mdl-cell--1-col-phone">
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                       <input class="mdl-textfield__input" type="text" pattern="[0-9]*" v-model="init[0]">
                       <label class="mdl-textfield__label">HP</label>
                       <span class="mdl-textfield__error">Not available!</span>
                     </div>
                   </div>
-                  <div class="mdl-cell mdl-cell--2-col">
+                  <div class="mdl-cell mdl-cell--2-col mdl-cell--2-col-tablet mdl-cell--1-col-phone">
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                       <input class="mdl-textfield__input" type="text" pattern="[0-9]*" v-model="init[1]">
                       <label class="mdl-textfield__label">ATK</label>
                       <span class="mdl-textfield__error">Not available!</span>
                     </div>
                   </div>
-                  <div class="mdl-cell mdl-cell--2-col">
+                  <div class="mdl-cell mdl-cell--2-col mdl-cell--2-col-tablet mdl-cell--1-col-phone">
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                       <input class="mdl-textfield__input" type="text" pattern="[0-9]*" v-model="init[2]">
                       <label class="mdl-textfield__label">MAT</label>
                       <span class="mdl-textfield__error">Not available!</span>
                     </div>
                   </div>
-                  <div class="mdl-cell mdl-cell--2-col">
+                  <div class="mdl-cell mdl-cell--2-col-tablet mdl-cell--1-col-phone mdl-cell--hide-desktop">
+                  </div>
+                  <div class="mdl-cell mdl-cell--2-col mdl-cell--2-col-tablet mdl-cell--1-col-phone">
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                       <input class="mdl-textfield__input" type="text" pattern="[0-9]*" v-model="init[3]">
                       <label class="mdl-textfield__label">DEF</label>
                       <span class="mdl-textfield__error">Not available!</span>
                     </div>
                   </div>
-                  <div class="mdl-cell mdl-cell--2-col">
+                  <div class="mdl-cell mdl-cell--2-col mdl-cell--2-col-tablet mdl-cell--1-col-phone">
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                       <input class="mdl-textfield__input" type="text" pattern="[0-9]*" v-model="init[4]">
                       <label class="mdl-textfield__label">MDF</label>
                       <span class="mdl-textfield__error">Not available!</span>
                     </div>
                   </div>
-                  <div class="mdl-cell mdl-cell--2-col">
+                  <div class="mdl-cell mdl-cell--2-col mdl-cell--2-col-tablet mdl-cell--1-col-phone">
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                       <input class="mdl-textfield__input" type="text" pattern="[0-9]*" v-model="init[5]">
                       <label class="mdl-textfield__label">SPD</label>
@@ -351,44 +353,46 @@
                 </div>
                 <hr>
                 <div class="mdl-grid">
-                  <div class="mdl-cell mdl-cell--12-col">
+                  <div class="mdl-cell mdl-cell--12-col mdl-cell--2-col-tablet mdl-cell--1-col-phone">
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                       <input class="mdl-textfield__input" type="text" pattern="[0-9]*" v-model="lv">
                       <label class="mdl-textfield__label">Lv.</label>
                       <span class="mdl-textfield__error">Not available!</span>
                     </div>
                   </div>
-                  <div class="mdl-cell mdl-cell--2-col">
+                  <div class="mdl-cell mdl-cell--2-col mdl-cell--2-col-tablet mdl-cell--1-col-phone">
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                       <input class="mdl-textfield__input" type="text" v-model="result[0]" readonly>
                       <label class="mdl-textfield__label">HP</label>
                     </div>
                   </div>
-                  <div class="mdl-cell mdl-cell--2-col">
+                  <div class="mdl-cell mdl-cell--2-col mdl-cell--2-col-tablet mdl-cell--1-col-phone">
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                       <input class="mdl-textfield__input" type="text" v-model="result[1]" readonly>
                       <label class="mdl-textfield__label">ATK</label>
                     </div>
                   </div>
-                  <div class="mdl-cell mdl-cell--2-col">
+                  <div class="mdl-cell mdl-cell--2-col mdl-cell--2-col-tablet mdl-cell--1-col-phone">
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                       <input class="mdl-textfield__input" type="text" v-model="result[2]" readonly>
                       <label class="mdl-textfield__label">MAT</label>
                     </div>
                   </div>
-                  <div class="mdl-cell mdl-cell--2-col">
+                  <div class="mdl-cell mdl-cell--2-col-tablet mdl-cell--1-col-phone mdl-cell--hide-desktop">
+                  </div>
+                  <div class="mdl-cell mdl-cell--2-col mdl-cell--2-col-tablet mdl-cell--1-col-phone">
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                       <input class="mdl-textfield__input" type="text" v-model="result[3]" readonly>
                       <label class="mdl-textfield__label">DEF</label>
                     </div>
                   </div>
-                  <div class="mdl-cell mdl-cell--2-col">
+                  <div class="mdl-cell mdl-cell--2-col mdl-cell--2-col-tablet mdl-cell--1-col-phone">
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                       <input class="mdl-textfield__input" type="text" v-model="result[4]" readonly>
                       <label class="mdl-textfield__label">MDF</label>
                     </div>
                   </div>
-                  <div class="mdl-cell mdl-cell--2-col">
+                  <div class="mdl-cell mdl-cell--2-col mdl-cell--2-col-tablet mdl-cell--1-col-phone">
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                       <input class="mdl-textfield__input" type="text" v-model="result[5]" readonly>
                       <label class="mdl-textfield__label">SPD</label>

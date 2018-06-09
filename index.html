@@ -45,28 +45,28 @@
                     <div class="mdl-grid">
                       <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--2-col-phone">
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                          <input class="mdl-textfield__input" type="text" pattern="[0-9]*" v-model="ATK">
+                          <input class="mdl-textfield__input" type="number" pattern="[0-9]*" v-model="ATK">
                           <label class="mdl-textfield__label">味方攻撃</label>
                           <span class="mdl-textfield__error">Not available!</span>
                         </div>
                       </div>
                       <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--2-col-phone">
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                          <input class="mdl-textfield__input" type="text" pattern="[0-9]*" v-model="DEF">
+                          <input class="mdl-textfield__input" type="number" pattern="[0-9]*" v-model="DEF">
                           <label class="mdl-textfield__label">敵防御</label>
                           <span class="mdl-textfield__error">Not available!</span>
                         </div>
                       </div>
                       <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--2-col-phone">
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                          <input class="mdl-textfield__input" type="text" pattern="[0-9]*(\.[0-9]+)?" v-model="skill">
+                          <input class="mdl-textfield__input" type="number" pattern="[0-9]*(\.[0-9]+)?" v-model.number="skill">
                           <label class="mdl-textfield__label">スキル/%</label>
                           <span class="mdl-textfield__error">Not available!</span>
                         </div>
                       </div>
                       <div class="mdl-cell mdl-cell--hide-desktop mdl-cell--4-col-tablet mdl-cell--2-col-phone">
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                          <input class="mdl-textfield__input" type="text" pattern="[0-9]*(\.[0-9]+)?" v-model="oncebuff">
+                          <input class="mdl-textfield__input" type="number" pattern="[0-9]*(\.[0-9]+)?" v-model="oncebuff">
                           <label class="mdl-textfield__label">一度バフ/%</label>
                           <span class="mdl-textfield__error">Not available!</span>
                         </div>

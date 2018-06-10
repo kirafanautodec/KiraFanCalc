@@ -1,3 +1,32 @@
+var trans = {
+  lang: {j:0, e:1, z:2},
+  app: ["きらファン計算機", "KiraFanCalc", "KiraFan 计算器"],
+
+  home: ["ホーム", "Home", "主页"],
+  damagecalc: ["ダメージ", "Damage", "伤害"],
+  criticalcalc: ["クリ率", "Critical", "暴击"],
+  ordercalc: ["タイムライン", "Timeline", "行动条"],
+  statuscalc: ["ステータス", "Status", "角色数值"],
+
+  damagecalculation: ["ダメージ計算", "Damage Calculation", "伤害计算"],
+
+  damageatk: ["味方攻撃", "ATK", "我方攻击"],
+  damagedef: ["敵防御", "DEF", "敌方防御"],
+  damageskill: ["スキル", "Skill", "技能"],
+  damageoncebuff: ["一度バフ", "Next-turn buff", "一度buff"],
+  damageatkbuff: ["味方攻撃バフ", "ATK buff", "我方攻击buff"],
+  damagedefbuff: ["敵防御バフ", "DEF buff", "敌方防御buff"],
+  damageatkelement: ["味方属性バフ", "ATK element buff", "我方属性buff"],
+  damagedefelement: ["敵属性バフ", "DEF element buff", "敌方属性buff"],
+  damageresult: ["ダメージ＝", "Damage =", "伤害 ="],
+
+  optioncritical: ["クリティカル", "Critical", "暴击"],
+  optionelement2: ["有利", "", "有利"],
+  optionelement1: ["普通", "", "普通"],
+  optionelement0: ["不利", "", "不利"],
+
+};
+
 function range(val, min, max) {
   if (val < min) return min;
   if (val > max) return max;
@@ -9,6 +38,40 @@ function elementrange(element, val) {
   if (element==1.0) return range(val, 0.6, 1.4);
   if (element==2.0) return range(val, 1.6, 2.4);
 }
+
+Vue.component('trans', {
+  props: ['t'],
+  methods: {
+    trans: function(t) {
+      lang = 0
+      for (i in navigator.languages)
+      {
+        console.log(i, navigator.languages[i][0]);
+        if (navigator.languages[i][0] in trans.lang)
+        {
+          lang = trans.lang[navigator.languages[i][0]];
+          break;
+        }
+      }
+      return trans[t][lang]//this.text[t][lang]
+    }
+  },
+  template: '<span>{{trans(t)}}</span>'
+})
+
+var header = new Vue({
+  el: '#header',
+  data: {
+    
+  }
+})
+
+var home = new Vue({
+  el: '#home',
+  data: {
+    lang: navigator.languages
+  }
+})
 
 var damagecalc = new Vue({
   el: '#damagecalc',

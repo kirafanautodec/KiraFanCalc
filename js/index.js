@@ -21,9 +21,9 @@ var trans = {
   damageresult: ["ダメージ＝", "Damage =", "伤害 ="],
 
   optioncritical: ["クリティカル", "Critical", "暴击"],
-  optionelement2: ["有利", "", "有利"],
-  optionelement1: ["普通", "", "普通"],
-  optionelement0: ["不利", "", "不利"],
+  optionelement2: ["有利", "Effective", "有利"],
+  optionelement1: ["普通", "Normal", "普通"],
+  optionelement0: ["不利", "Uneffective", "不利"],
 
 };
 

@@ -94,7 +94,7 @@ var damagecalc = new Vue({
         * this.ATK / this.DEF * this.skill / 6 
         * range(this.ATKbuff?1+this.ATKbuff/100:1, 0.5, 2.5)
         / range(this.DEFbuff?1+this.DEFbuff/100:1, 0.33, 2.0)
-        * elementrange(this.element, (this.element + (this.ATKElement?this.ATKElement:0)/100 - (this.DEFElement?this.DEFElement:0)/100))
+        * elementrange(this.element, this.element*(1.0 + (this.ATKElement?this.ATKElement:0)/100 - (this.DEFElement?this.DEFElement:0)/100))
         * (this.oncebuff?1+this.oncebuff/100:1) 
         * (this.critical?1.5:1.0) 
         * (this.jump?this.jump:1) 
@@ -137,7 +137,13 @@ var statuscalc = new Vue({
   el: '#statuscalc',
   data: {
     characlass: 0,
-    table: [[0.052, 0.055, 0.040, 0.080, 0.071, 0.001], [0.052, 0.040, 0.055, 0.071, 0.080, 0.001], [0.060, 0.040, 0.040, 0.080, 0.088, 0.001], [0.045, 0.040, 0.040, 0.097, 0.088, 0.001], [0.047, 0.040, 0.050, 0.071, 0.097, 0.001]],
+    table: [
+      [0.052, 0.055, 0.040, 0.080, 0.071, 0.001], 
+      [0.052, 0.040, 0.055, 0.071, 0.080, 0.001], 
+      [0.060, 0.040, 0.040, 0.080, 0.088, 0.001], 
+      [0.045, 0.040, 0.040, 0.097, 0.088, 0.001], 
+      [0.047, 0.040, 0.050, 0.071, 0.097, 0.001]
+    ],
     initlv: null,
     init: [null, null, null, null, null, null],
     lv: null

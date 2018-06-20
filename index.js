@@ -20,6 +20,11 @@ var trans = {
   '敵属性バフ': ["敵属性バフ", "DEF element buff", "敌方属性buff"],
   'ダメージ＝': ["ダメージ＝", "Damage =", "伤害 ="],
 
+  'スタン計算': ['スタン計算', 'Stun Calculation', '眩晕计算'],
+  '敵最大HP': ['敵最大HP', 'Enemy\'s maximum HP', '敌方最大HP'],
+  'スタン係数': ['スタン係数', 'Stun Coefficient', '眩晕系数'],
+  'スタンゲージ＝': ['スタンゲージ＝', 'Stun Gauge =', '眩晕条 ='],
+
   'クリティカル': ["クリティカル", "Critical", "暴击"],
   '有利': ["有利", "Effective", "有利"],
   '普通': ["普通", "Normal", "普通"],
@@ -81,9 +86,7 @@ Vue.component('trans', {
       }
       try {
         return trans[t][lang]//this.text[t][lang]
-      }
-      catch (e)
-      {
+      } catch (e) {
         return t
       }
     }
@@ -118,19 +121,33 @@ var damagecalc = new Vue({
     DEFElement: 0,
     element: 1.0,
     critical: false,
-    jump: 1.0
+    jump: 1.0,
+    HP: null,
+    stunCoef: 0.8,
+    averageDamage: 0,
   },
   computed: {
     damage: function() {
-      return parseInt(1.0
+      ans = parseInt(1.0
         * this.ATK / this.DEF * this.skill / 6 
         * range(this.ATKbuff?1+this.ATKbuff/100:1, 0.5, 2.5)
         / range(this.DEFbuff?1+this.DEFbuff/100:1, 0.33, 2.0)
         * elementrange(this.element, this.element*(1.0 + (this.ATKElement?this.ATKElement:0)/100 - (this.DEFElement?this.DEFElement:0)/100))
         * (this.oncebuff?1+this.oncebuff/100:1) 
         * (this.critical?1.5:1.0) 
-        * (this.jump?this.jump:1) 
+        * (this.jump?this.jump:1)
       )
+      if (ans) this.averageDamage = parseInt(0.925 * ans)
+      return ans
+    },
+    stun: function() {
+      return range(this.averageDamage / this.HP * this.stunCoef * this.element, 0, 1) * 100
+    }
+  },
+  methods: {
+    test: function() {
+      alert('hello')
+      return
     }
   }
 });
@@ -156,11 +173,20 @@ var ordercalc = new Vue({
   data: {
     spd: null,
     load: 75,
-    buff: 0
+    buff: 0,
+    party: [null, null, null, null, null, null],
+    enemy: [null, null, null],
+    init: false,
   },
   computed: {
     order: function() {
       return range((100-Math.floor(((this.spd<50?NaN:this.spd)-50)/2)-1)*this.load*0.01*(1-this.buff*0.01), 15, 500)
+    }
+  },
+  methods: {
+    initialize: function() {
+      //init = true;
+      return;
     }
   }
 });

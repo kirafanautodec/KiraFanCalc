@@ -7,9 +7,9 @@
     <script src="./libs/material.min.js"></script>
     <script src="./libs/jquery.min.js"></script>
     <script src="./libs/vue.js"></script>
-    <link rel="stylesheet" href="./css/material.min.css">
-    <link rel="stylesheet" href="./css/index.css">
-    <link rel="stylesheet" href="./css/icon.css">
+    <link rel="stylesheet" href="./libs/material.min.css">
+    <link rel="stylesheet" href="./libs/icon.css">
+    <link rel="stylesheet" href="./index.css">
     <base target="_blank">
     <link rel="icon" href="https://kirafan.bangbang93.com/static/assets/texture/charauiresource/charaicon/charaicon_21031001.jpeg" type="image/x-icon">
   </head>
@@ -150,6 +150,63 @@
                   </div>
                 </div>
               </div>
+
+              <div class="setting-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+                <div>
+                  <h5 id="titleSettings" class="mdl-color-text--accent"><trans t="スタン計算"></trans></h5>
+                </div>
+                <div class="mdl-grid">
+                  <div class="mdl-cell mdl-cell--8-col mdl-cell--6-col-tablet mdl-cell--4-col-phone">
+                    <div class="mdl-grid">
+                      <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--2-col-phone">
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                          <input class="mdl-textfield__input" type="number" pattern="[0-9]*" v-model="averageDamage">
+                          <label class="mdl-textfield__label"><trans t="ダメージ"></trans></label>
+                          <span class="mdl-textfield__error">Not available!</span>
+                        </div>
+                      </div>
+                      <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--2-col-phone">
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                          <input class="mdl-textfield__input" type="number" pattern="[0-9]*" v-model="HP">
+                          <label class="mdl-textfield__label"><trans t="敵最大HP"></trans></label>
+                          <span class="mdl-textfield__error">Not available!</span>
+                        </div>
+                      </div>
+                      <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                          <input class="mdl-textfield__input" type="number" step=0.01 v-model="stunCoef">
+                          <label class="mdl-textfield__label"><trans t="スタン係数"></trans></label>
+                          <span class="mdl-textfield__error">Not available!</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="mdl-cell mdl-cell--4-col mdl-cell--2-col-tablet mdl-cell--4-col-phone">
+                    <button :class="'mdl-button mdl-js-button mdl-button--primary'+(element==2.0?' mdl-button--raised':'')" @click="element=2.0">
+                      <trans t="有利"></trans>
+                    </button>
+                    <button :class="'mdl-button mdl-js-button mdl-button--primary'+(element==1.0?' mdl-button--raised':'')" @click="element=1.0">
+                      <trans t="普通"></trans>
+                    </button>
+                    <button :class="'mdl-button mdl-js-button mdl-button--primary'+(element==0.5?' mdl-button--raised':'')" @click="element=0.5">
+                      <trans t="不利"></trans>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="mdl-grid">
+                  <div class="mdl-cell mdl-cell--12-col-desktop mdl-cell--hide-tablet mdl-cell--hide-phone">
+                    <h1><trans t="スタンゲージ＝"></trans><span style="float:right">{{stun.toFixed(2)}}%</span></h1>
+                  </div>
+                  <div class="mdl-cell mdl-cell--hide-desktop mdl-cell--12-col-tablet mdl-cell--hide-phone">
+                    <h2><trans t="スタンゲージ＝"></trans><span style="float:right">{{stun.toFixed(2)}}%</span></h2>
+                  </div>
+                  <div class="mdl-cell mdl-cell--hide-desktop mdl-cell--hide-tablet mdl-cell--12-col-phone">
+                    <h3><trans t="スタンゲージ＝"></trans><span style="float:right">{{stun.toFixed(2)}}%</span></h3>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -211,13 +268,13 @@
                 <hr>
                 <div class="mdl-grid">
                   <div class="mdl-cell mdl-cell--12-col-desktop mdl-cell--hide-tablet mdl-cell--hide-phone">
-                    <h1><trans t='クリティカル率＝'></trans><span style="float:right">{{critical}}%</span></h1>
+                    <h1><trans t='クリティカル率＝'></trans><span style="float:right">{{critical.toFixed(2)}}%</span></h1>
                   </div>
                   <div class="mdl-cell mdl-cell--hide-desktop mdl-cell--12-col-tablet mdl-cell--hide-phone">
-                    <h2><trans t='クリティカル率＝'></trans><span style="float:right">{{critical}}%</span></h2>
+                    <h2><trans t='クリティカル率＝'></trans><span style="float:right">{{critical.toFixed(2)}}%</span></h2>
                   </div>
                   <div class="mdl-cell mdl-cell--hide-desktop mdl-cell--hide-tablet mdl-cell--12-col-phone">
-                    <h3><trans t='クリティカル率＝'></trans><span style="float:right">{{critical}}%</span></h3>
+                    <h3><trans t='クリティカル率＝'></trans><span style="float:right">{{critical.toFixed(2)}}%</span></h3>
                   </div>
                 </div>
               </div>
@@ -275,6 +332,15 @@
                 </div>
                 <div>
                   <trans t='開発中'></trans>
+                  <div v-if='!init'>
+                    <button class="mdl-button mdl-js-button mdl-button--primary" @click="init=!init">
+                      init
+                    </button>
+                    init
+                  </div> 
+                  <div v-else>
+                    run
+                  </div>
                 </div>
               </div>
             </div>
@@ -416,5 +482,5 @@
       </main>
     </div>
   </body>
-  <script src="./js/index.js"></script>
+  <script src="./index.js"></script>
 </html>

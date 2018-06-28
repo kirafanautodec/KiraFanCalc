@@ -108,6 +108,23 @@ var home = new Vue({
   }
 })
 
+Vue.filter("prettifyNum",function(a){
+      if (isNaN(a)){
+        return 0
+      }
+      a = a.toString()
+      let l = a.length
+      let i = a.length - 1
+      let res = ""
+      for (i;i>=0;i--){
+        res = a[i] + res
+        if ((l - i) % 3 === 0 && i > 0){
+          res = ',' + res
+        }
+      }
+      return res
+    });
+
 var damagecalc = new Vue({
   el: '#damagecalc',
   data: {

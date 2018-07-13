@@ -16,8 +16,8 @@ var trans = {
   一度バフ: ['一度バフ', 'Next-turn buff', '一度buff', '공격자의 한 번만 버프'],
   味方攻撃バフ: ['味方攻撃バフ', 'ATK buff', '我方攻击buff', '공격자의 공격 버프'],
   敵防御バフ: ['敵防御バフ', 'DEF buff', '敌方防御buff', '적의 방어 버프'],
-  味方属性バフ: ['味方属性バフ', 'ATK element buff', '我方属性buff', '공격자의 속성 버프'],
-  敵属性バフ: ['敵属性バフ', 'DEF element buff', '敌方属性buff', '적의 속성 버프'],
+  味方有利属性バフ: ['味方有利属性バフ', 'ATK element buff', '我方有利属性buff', '공격자의 속성 버프'],
+  敵属性耐性バフ: ['敵属性耐性バフ', 'DEF element buff', '敌方属性耐性buff', '적의 속성 버프'],
   'ダメージ＝': ['ダメージ＝', 'Damage =', '伤害 =', '대미지 ='],
 
   スタン計算: ['スタン計算', 'Stun Calculation', '眩晕计算', '기절(스턴) 계산'],
@@ -134,6 +134,7 @@ Vue.filter('prettifyNum', function(a) {
 var damagecalc = new Vue({
   el: '#damagecalc',
   data: {
+    render: 1, 
     ATK: null,
     DEF: null,
     skill: null,
@@ -141,6 +142,7 @@ var damagecalc = new Vue({
     DEFbuff: 0,
     oncebuff: 0,
     ATKElement: 0,
+    ATKElement0: 0,
     DEFElement: 0,
     element: 1.0,
     critical: false,
@@ -151,20 +153,17 @@ var damagecalc = new Vue({
   },
   computed: {
     damage: function() {
-      ans = parseInt(
-        ((((((1.0 * this.ATK) / this.DEF) * this.skill) / 6) *
-          range(this.ATKbuff ? 1 + this.ATKbuff / 100 : 1, 0.5, 2.5)) /
-          range(this.DEFbuff ? 1 + this.DEFbuff / 100 : 1, 0.33, 2.0)) *
-          elementrange(
-            this.element,
-            this.element *
-              (1.0 +
-                (this.ATKElement ? this.ATKElement : 0) / 100 -
-                (this.DEFElement ? this.DEFElement : 0) / 100)
-          ) *
-          (this.oncebuff ? 1 + this.oncebuff / 100 : 1) *
-          (this.critical ? 1.5 : 1.0) *
-          (this.jump ? this.jump : 1)
+      ans = parseInt(1.0 / 6.0
+          * Math.floor(1.0 * this.ATK * range(this.ATKbuff ? 1 + this.ATKbuff / 100 : 1, 0.50, 2.5))
+          / Math.floor(1.0 * this.DEF * range(this.DEFbuff ? 1 + this.DEFbuff / 100 : 1, 0.33, 2.0))
+          * this.skill
+          * (
+              (this.element==2.0 && this.ATKElement ? this.ATKElement : 0) / 100
+              + elementrange(this.element, this.element * (1.0 - (this.DEFElement ? this.DEFElement : 0) / 100))
+            )
+          * (this.oncebuff ? 1 + this.oncebuff / 100 : 1) 
+          * (this.critical ? 1.5 : 1.0) 
+          * (this.jump ? this.jump : 1)
       );
       if (ans) this.averageDamage = parseInt(0.925 * ans);
       return ans;
@@ -182,6 +181,11 @@ var damagecalc = new Vue({
   methods: {
     test: function() {
       alert('hello');
+      return;
+    },
+    rerender: function() {
+      render = false;
+      render = true;
       return;
     }
   }

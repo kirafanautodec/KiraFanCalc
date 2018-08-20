@@ -152,15 +152,18 @@ var damagecalc = new Vue({
     averageDamage: 0
   },
   computed: {
+    elementCoef: function() {
+      return (
+        (this.element==2.0 && this.ATKElement ? this.ATKElement : 0) / 100
+        + elementrange(this.element, this.element * (1.0 - (this.DEFElement ? this.DEFElement : 0) / 100))
+      );
+    },
     damage: function() {
       ans = parseInt(1.0 / 6.0
           * Math.floor(1.0 * this.ATK * range(this.ATKbuff ? 1 + this.ATKbuff / 100 : 1, 0.50, 2.5))
           / Math.floor(1.0 * this.DEF * range(this.DEFbuff ? 1 + this.DEFbuff / 100 : 1, 0.33, 2.0))
           * this.skill
-          * (
-              (this.element==2.0 && this.ATKElement ? this.ATKElement : 0) / 100
-              + elementrange(this.element, this.element * (1.0 - (this.DEFElement ? this.DEFElement : 0) / 100))
-            )
+          * this.elementCoef
           * (this.oncebuff ? 1 + this.oncebuff / 100 : 1) 
           * (this.critical ? 1.5 : 1.0) 
           * (this.jump ? this.jump : 1)
@@ -171,7 +174,7 @@ var damagecalc = new Vue({
     stun: function() {
       return (
         range(
-          (this.averageDamage / this.HP) * this.stunCoef * this.element,
+          (this.averageDamage / this.HP) * this.stunCoef * this.elementCoef,
           0,
           1
         ) * 100

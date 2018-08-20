@@ -24,6 +24,7 @@ var trans = {
   敵最大HP: ['敵最大HP', "Enemy's maximum HP", '敌方最大HP', '적의 초기 HP'],
   スタン係数: ['スタン係数', 'Stun Coefficient', '眩晕系数', '스턴 계수'],
   'スタンゲージ＝': ['スタンゲージ＝', 'Stun Gauge =', '眩晕条 =', '스턴 게이지 ='],
+  'スタン必要ダメージ＝': ['スタン必要ダメージ＝', 'Stun Necessity =', '眩晕必要伤害 =', 'スタン必要ダメージ＝'],
 
   クリティカル: ['クリティカル', 'Critical', '暴击', '크리티컬'],
   有利: ['有利', 'Effective', '克制', '유리'],
@@ -179,6 +180,9 @@ var damagecalc = new Vue({
           1
         ) * 100
       );
+    },
+    stunDamage: function() {
+      return this.HP / this.stunCoef / this.elementCoef
     }
   },
   methods: {

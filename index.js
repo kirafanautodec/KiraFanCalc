@@ -18,6 +18,7 @@ var trans = {
   敵防御バフ: ['敵防御バフ', 'DEF buff', '敌方防御buff', '적의 방어 버프'],
   味方有利属性バフ: ['味方有利属性バフ', 'Effective element buff', '我方有利属性buff', '공격자의 속성 버프'],
   敵属性耐性バフ: ['敵属性耐性バフ', 'Element resistance buff', '敌方属性耐性buff', '적의 속성 버프'],
+  クリティカルダメージバフ: ['クリティカルダメージバフ', 'Critical damage buff', '暴击伤害buff', '크리티컬 데미지 버프'],
   'ダメージ＝': ['ダメージ＝', 'Damage =', '伤害 =', '대미지 ='],
 
   スタン計算: ['スタン計算', 'Stun Calculation', '眩晕计算', '기절(스턴) 계산'],
@@ -150,7 +151,8 @@ var damagecalc = new Vue({
     jump: 1.0,
     HP: null,
     stunCoef: 0.8,
-    averageDamage: 0
+    averageDamage: 0,
+    CriticalUp: 0,
   },
   computed: {
     elementCoef: function() {
@@ -166,7 +168,7 @@ var damagecalc = new Vue({
           * this.skill
           * this.elementCoef
           * (this.oncebuff ? 1 + this.oncebuff / 100 : 1) 
-          * (this.critical ? 1.5 : 1.0) 
+          * (this.critical ? 1.5 * range(1 + this.CriticalUp / 100, 0, 2) : 1.0) 
           * (this.jump ? this.jump : 1)
       );
       if (ans) this.averageDamage = parseInt(0.925 * ans);

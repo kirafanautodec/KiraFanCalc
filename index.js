@@ -52,6 +52,7 @@ var trans = {
   硬直値計算: ['硬直値計算', 'Order Value Calculation', '行动值计算', '지연 게산 '],
   スキル硬直: ['スキル硬直', 'Skill load factor', '技能行动系数', '스길의 지연 게수'],
   SPDバフ: ['SPDバフ', 'SPD buff', 'SPD buff', 'SPD 버브'],
+  クイックドロウ: ['クイックドロウ', 'Quick Draw', 'Quick Draw', 'Quick Draw'],
 
   '硬直値＝': ['硬直値＝', 'Order Value =', '行动值 =', '지연 ='],
 
@@ -221,6 +222,7 @@ var ordercalc = new Vue({
     spd: null,
     load: 75,
     buff: 0,
+    lfrbuff: 0,
     party: [null, null, null, null, null, null],
     enemy: [null, null, null],
     init: false
@@ -229,7 +231,7 @@ var ordercalc = new Vue({
     order: function() {
       return range(
         (100 - Math.floor(((this.spd < 50 ? NaN : this.spd) - 50) / 2) - 1) *
-          this.load *
+          this.load * (1 - this.lfrbuff * 0.01) * 
           0.01 *
           (1 - this.buff * 0.01),
         15,

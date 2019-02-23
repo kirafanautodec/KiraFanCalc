@@ -169,7 +169,7 @@ var damagecalc = new Vue({
           * this.skill
           * this.elementCoef
           * (this.oncebuff ? 1 + this.oncebuff / 100 : 1) 
-          * (this.critical ? 1.5 * range(1 + this.CriticalUp / 100, 0, 2) : 1.0) 
+          * (this.critical ? 1.5 * range(1 + this.CriticalUp / 100, 1.0/1.5, 2) : 1.0) 
           * (this.jump ? this.jump : 1)
       );
       if (ans) this.averageDamage = parseInt(0.925 * ans);

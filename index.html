@@ -95,16 +95,23 @@
                         </div>
                       </div>
                       <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--2-col-phone">
-                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" >
                           <input class="mdl-textfield__input" type="number" step=0.01 v-model="ATKElement">
-                          <label class="mdl-textfield__label"><trans t="味方属性バフ"></trans>/%</label>
+                          <label class="mdl-textfield__label"><trans t="味方有利属性バフ"></trans>/%</label>
                           <span class="mdl-textfield__error">Not available!</span>
                         </div>
                       </div>
                       <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--2-col-phone">
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                           <input class="mdl-textfield__input" type="number" step=0.01 v-model="DEFElement">
-                          <label class="mdl-textfield__label"><trans t="敵属性バフ"></trans>/%</label>
+                          <label class="mdl-textfield__label"><trans t="敵属性耐性バフ"></trans>/%</label>
+                          <span class="mdl-textfield__error">Not available!</span>
+                        </div>
+                      </div>
+                      <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--4-col-phone">
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                          <input class="mdl-textfield__input" type="number" step=0.01 v-model="CriticalUp">
+                          <label class="mdl-textfield__label"><trans t="クリティカルダメージバフ"></trans>/%</label>
                           <span class="mdl-textfield__error">Not available!</span>
                         </div>
                       </div>
@@ -119,10 +126,10 @@
                     <button :class="'mdl-button mdl-js-button mdl-button--primary'+(element==2.0?' mdl-button--raised':'')" @click="element=2.0">
                       <trans t="有利"></trans>
                     </button>
-                    <button :class="'mdl-button mdl-js-button mdl-button--primary'+(element==1.0?' mdl-button--raised':'')" @click="element=1.0">
+                    <button :class="'mdl-button mdl-js-button mdl-button--primary'+(element==1.0?' mdl-button--raised':'')" @click="element=1.0;">
                       <trans t="普通"></trans>
                     </button>
-                    <button :class="'mdl-button mdl-js-button mdl-button--primary'+(element==0.5?' mdl-button--raised':'')" @click="element=0.5">
+                    <button :class="'mdl-button mdl-js-button mdl-button--primary'+(element==0.5?' mdl-button--raised':'')" @click="element=0.5;">
                       <trans t="不利"></trans>
                     </button>
                     <hr>
@@ -179,6 +186,20 @@
                           <span class="mdl-textfield__error">Not available!</span>
                         </div>
                       </div>
+                      <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--2-col-phone">
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" >
+                          <input class="mdl-textfield__input" type="number" step=0.01 v-model="ATKElement">
+                          <label class="mdl-textfield__label"><trans t="味方有利属性バフ"></trans>/%</label>
+                          <span class="mdl-textfield__error">Not available!</span>
+                        </div>
+                      </div>
+                      <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--2-col-phone">
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                          <input class="mdl-textfield__input" type="number" step=0.01 v-model="DEFElement">
+                          <label class="mdl-textfield__label"><trans t="敵属性耐性バフ"></trans>/%</label>
+                          <span class="mdl-textfield__error">Not available!</span>
+                        </div>
+                      </div>
                     </div>
                   </div>
 
@@ -195,15 +216,35 @@
                   </div>
                 </div>
 
+                <hr>
+
                 <div class="mdl-grid">
                   <div class="mdl-cell mdl-cell--12-col-desktop mdl-cell--hide-tablet mdl-cell--hide-phone">
-                    <h1><trans t="スタンゲージ＝"></trans><span style="float:right">{{stun.toFixed(2)}}%</span></h1>
+                    <h1>
+                      <trans t="スタンゲージ＝"></trans><span style="float:right">{{stun.toFixed(2)}}%</span>
+                      <br>
+                      <span style="font-size:70%; color:gray">
+                        <trans t="スタン必要ダメージ＝" ></trans><span style="float:right">{{stunDamage.toFixed(0)}}</span>
+                      </span>
+                    </h1>
                   </div>
                   <div class="mdl-cell mdl-cell--hide-desktop mdl-cell--12-col-tablet mdl-cell--hide-phone">
-                    <h2><trans t="スタンゲージ＝"></trans><span style="float:right">{{stun.toFixed(2)}}%</span></h2>
+                    <h2>
+                      <trans t="スタンゲージ＝"></trans><span style="float:right">{{stun.toFixed(2)}}%</span>
+                      <br>
+                      <span style="font-size:70%; color:gray">
+                        <trans t="スタン必要ダメージ＝"></trans><span style="float:right">{{stunDamage.toFixed(0)}}</span>
+                      </span>
+                    </h2>
                   </div>
                   <div class="mdl-cell mdl-cell--hide-desktop mdl-cell--hide-tablet mdl-cell--12-col-phone">
-                    <h3><trans t="スタンゲージ＝"></trans><span style="float:right">{{stun.toFixed(2)}}%</span></h3>
+                    <h3>
+                      <trans t="スタンゲージ＝"></trans><span style="float:right">{{stun.toFixed(2)}}%</span>
+                      <br>
+                      <span style="font-size:70%; color:gray">
+                        <trans t="スタン必要ダメージ＝"></trans><span style="float:right">{{stunDamage.toFixed(0)}}</span>
+                      </span>
+                    </h3>
                   </div>
                 </div>
               </div>
@@ -257,10 +298,10 @@
                     <button :class="'mdl-button mdl-js-button mdl-button--primary'+(element==2.0?' mdl-button--raised':'')" @click="element=2.0">
                       <trans t='有利'></trans>
                     </button>
-                    <button :class="'mdl-button mdl-js-button mdl-button--primary'+(element==1.0?' mdl-button--raised':'')" @click="element=1.0">
+                    <button :class="'mdl-button mdl-js-button mdl-button--primary'+(element==1.0?' mdl-button--raised':'')" @click="element=1.0;">
                       <trans t='普通'></trans>
                     </button>
-                    <button :class="'mdl-button mdl-js-button mdl-button--primary'+(element==0.5?' mdl-button--raised':'')" @click="element=0.5">
+                    <button :class="'mdl-button mdl-js-button mdl-button--primary'+(element==0.5?' mdl-button--raised':'')" @click="element=0.5;">
                       <trans t='不利'></trans>
                     </button>
                   </div>

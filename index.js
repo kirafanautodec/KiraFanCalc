@@ -16,14 +16,16 @@ var trans = {
   一度バフ: ['一度バフ', 'Next-turn buff', '一度buff', '공격자의 한 번만 버프'],
   味方攻撃バフ: ['味方攻撃バフ', 'ATK buff', '我方攻击buff', '공격자의 공격 버프'],
   敵防御バフ: ['敵防御バフ', 'DEF buff', '敌方防御buff', '적의 방어 버프'],
-  味方属性バフ: ['味方属性バフ', 'ATK element buff', '我方属性buff', '공격자의 속성 버프'],
-  敵属性バフ: ['敵属性バフ', 'DEF element buff', '敌方属性buff', '적의 속성 버프'],
+  味方有利属性バフ: ['味方有利属性バフ', 'Effective element buff', '我方有利属性buff', '공격자의 속성 버프'],
+  敵属性耐性バフ: ['敵属性耐性バフ', 'Element resistance buff', '敌方属性耐性buff', '적의 속성 버프'],
+  クリティカルダメージバフ: ['クリティカルダメージバフ', 'Critical damage buff', '暴击伤害buff', '크리티컬 데미지 버프'],
   'ダメージ＝': ['ダメージ＝', 'Damage =', '伤害 =', '대미지 ='],
 
   スタン計算: ['スタン計算', 'Stun Calculation', '眩晕计算', '기절(스턴) 계산'],
   敵最大HP: ['敵最大HP', "Enemy's maximum HP", '敌方最大HP', '적의 초기 HP'],
   スタン係数: ['スタン係数', 'Stun Coefficient', '眩晕系数', '스턴 계수'],
   'スタンゲージ＝': ['スタンゲージ＝', 'Stun Gauge =', '眩晕条 =', '스턴 게이지 ='],
+  'スタン必要ダメージ＝': ['スタン必要ダメージ＝', 'Stun Necessity =', '眩晕必要伤害 =', '스턴에 필요한 대미지 ='],
 
   クリティカル: ['クリティカル', 'Critical', '暴击', '크리티컬'],
   有利: ['有利', 'Effective', '克制', '유리'],
@@ -135,6 +137,7 @@ Vue.filter('prettifyNum', function(a) {
 var damagecalc = new Vue({
   el: '#damagecalc',
   data: {
+    render: 1, 
     ATK: null,
     DEF: null,
     skill: null,
@@ -142,30 +145,32 @@ var damagecalc = new Vue({
     DEFbuff: 0,
     oncebuff: 0,
     ATKElement: 0,
+    ATKElement0: 0,
     DEFElement: 0,
     element: 1.0,
     critical: false,
     jump: 1.0,
     HP: null,
     stunCoef: 0.8,
-    averageDamage: 0
+    averageDamage: 0,
+    CriticalUp: 0,
   },
   computed: {
+    elementCoef: function() {
+      return (
+        (this.element==2.0 && this.ATKElement ? this.ATKElement : 0) / 100
+        + elementrange(this.element, this.element * (1.0 - (this.DEFElement ? this.DEFElement : 0) / 100))
+      );
+    },
     damage: function() {
-      ans = parseInt(
-        ((((((1.0 * this.ATK) / this.DEF) * this.skill) / 6) *
-          range(this.ATKbuff ? 1 + this.ATKbuff / 100 : 1, 0.5, 2.5)) /
-          range(this.DEFbuff ? 1 + this.DEFbuff / 100 : 1, 0.33, 2.0)) *
-          elementrange(
-            this.element,
-            this.element *
-              (1.0 +
-                (this.ATKElement ? this.ATKElement : 0) / 100 -
-                (this.DEFElement ? this.DEFElement : 0) / 100)
-          ) *
-          (this.oncebuff ? 1 + this.oncebuff / 100 : 1) *
-          (this.critical ? 1.5 : 1.0) *
-          (this.jump ? this.jump : 1)
+      ans = parseInt(1.0 / 6.0
+          * Math.floor(1.0 * this.ATK * range(this.ATKbuff ? 1 + this.ATKbuff / 100 : 1, 0.50, 2.5))
+          / Math.floor(1.0 * this.DEF * range(this.DEFbuff ? 1 + this.DEFbuff / 100 : 1, 0.33, 2.0))
+          * this.skill
+          * this.elementCoef
+          * (this.oncebuff ? 1 + this.oncebuff / 100 : 1) 
+          * (this.critical ? 1.5 * range(1 + this.CriticalUp / 100, 1.0/1.5, 2) : 1.0) 
+          * (this.jump ? this.jump : 1)
       );
       if (ans) this.averageDamage = parseInt(0.925 * ans);
       return ans;
@@ -173,16 +178,24 @@ var damagecalc = new Vue({
     stun: function() {
       return (
         range(
-          (this.averageDamage / this.HP) * this.stunCoef * this.element,
+          (this.averageDamage / this.HP) * this.stunCoef * this.elementCoef,
           0,
           1
         ) * 100
       );
+    },
+    stunDamage: function() {
+      return this.HP / this.stunCoef / this.elementCoef
     }
   },
   methods: {
     test: function() {
       alert('hello');
+      return;
+    },
+    rerender: function() {
+      render = false;
+      render = true;
       return;
     }
   }
